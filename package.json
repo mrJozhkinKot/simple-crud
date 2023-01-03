@@ -1,0 +1,27 @@
+{
+  "name": "simple-crud",
+  "version": "1.0.0",
+  "description": "CRUD app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrJozhkinKot/simple-crud.git"
+  },
+  "author": "Julia Shchuklina",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrJozhkinKot/simple-crud/issues"
+  },
+  "homepage": "https://github.com/mrJozhkinKot/simple-crud#readme",
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3"
+  }
+}
