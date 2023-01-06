@@ -1,7 +1,6 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
-// @ts-ignore
-import { app } from './app/app.ts';
+import { app } from './app/app';
 
 const port = Number(process.env.PORT) || 5050;
 

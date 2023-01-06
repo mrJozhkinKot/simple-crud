@@ -1,12 +1,9 @@
-import http from 'http';
+import * as http from 'http';
 import { UserInterface } from '../intefaces/interfaces';
-import {v4 as uuidv4} from "uuid";
-// @ts-ignore
-import { router } from './router.ts';
+import { router } from './router';
 
 
   const users: UserInterface[]= [];
-
   const getUserId = (url: string | undefined) => {
     const urlParts = url? url.split('/'): [];
     const userid: string = urlParts[urlParts.length-1];

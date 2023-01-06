@@ -9,7 +9,7 @@ export interface UserInterface {
 
 export interface RouterInterface {
   [path: string]: {
-    'GET': (req: http.IncomingMessage, res: http.ServerResponse) => void,
+    'GET'?: (req: http.IncomingMessage, res: http.ServerResponse) => void,
     'POST'?: (req: http.IncomingMessage, res: http.ServerResponse) => void,
     'PUT'?: (req: http.IncomingMessage, res: http.ServerResponse) => void,
     'DELETE'?: (req: http.IncomingMessage, res: http.ServerResponse) => void,

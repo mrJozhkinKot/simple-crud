@@ -1,68 +1,39 @@
 import http from 'http';
 import { UserInterface } from '../intefaces/interfaces';
-import {v4 as uuidv4} from "uuid";
 
-export const router = (req:any, res: http.ServerResponse, users: UserInterface[], userId: string ) => {
+import { getAllUsers } from '../handlers/getAllUsers';
+import { addNewUser } from '../handlers/addNewUser';
+import { getUser } from '../handlers/getUser';
+import { updateUser } from '../handlers/updateUser';
+import { deleteUser } from '../handlers/deleteUser';
+import { messageLogger } from '../service/messageLogger';
+import { ERROR_ENDPOINT, ERROR_METHOD } from '../service/messages';
+
+export const router = async (req:http.IncomingMessage, res: http.ServerResponse, users: UserInterface[], userId: string ) => {
   switch (req.url) {
     case `/api/users`:
       switch (req.method) {
-        case 'GET':
-          res.writeHead(200, {
-            'Content-type':' application/json'
-          })
-          res.end(JSON.stringify(users))
+        case 'GET': await getAllUsers(res, users)
           break
-        case 'POST':
-            let body = '';
-            req.on('data', (chunk: string) => body += chunk)
-            req.on('end', () => {
-              if(body) {
-                req.body = JSON.parse(body)
-              }
-          res.writeHead(201, {
-            'Content-type':' application/json'
-          })
-            const user: UserInterface = {"id": uuidv4(), ...req.body}
-            users.push(user);
-            res.end(JSON.stringify(user)) 
-          })
+        case 'POST': await addNewUser(req, res, users)
           break;
           default:
-            res.end('no method users')
+            messageLogger(res, 404, ERROR_METHOD)
       }
       break
     case `/api/user/${userId}`:
-      const user = users.filter((user) => user.id === userId)
       switch (req.method) {
-        case 'GET':
-          res.writeHead(200, {
-            'Content-type':' application/json'
-          })
-          res.end(JSON.stringify(user))
+        case 'GET': await getUser(req, res, users, userId)
           break
-        case 'PUT':
-          res.writeHead(200, {
-            'Content-type':' application/json'
-          })
-          const userUpdated = {...user, ...req.body}
-          res.end(JSON.stringify(userUpdated))
+        case 'PUT': await updateUser(req, res, users, userId)
           break
-          case 'DELETE':
-            res.writeHead(204, {
-              'Content-type':' application/json'
-            })
-          users.forEach((user, index) => {
-             if (user.id === userId) {
-              users.splice(index, 1)
-             }
-            })
-          res.end(JSON.stringify(users))
+        case 'DELETE': await deleteUser(req, res, users, userId)  
           break
           default:
-            res.end('no method user')
+            messageLogger(res, 404, ERROR_METHOD)
       }
       break
       default:
-        res.end('no path')
+        messageLogger(res, 404, ERROR_ENDPOINT)
   }
 }
