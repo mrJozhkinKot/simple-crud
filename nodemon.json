@@ -1,6 +1,6 @@
 {
     "ext": ".ts,.js",
     "execMap": {
-        "ts": "ts-node --experimental-specifier-resolution=node"
+        "ts": "ts-node "
     }
 }
