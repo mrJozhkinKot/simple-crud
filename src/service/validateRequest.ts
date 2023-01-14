@@ -1,9 +1,15 @@
 export const validateRequest = (obj: object) => {
-    let validate = true;
-    Object.keys(obj).forEach((key) => {
-        if ((key !== 'username') && (key !== 'age') && (key !== 'hobbies')) {
-            validate = false
+    const validKeys = ['username', 'age', 'hobbies']
+    let valid = true
+    validKeys.forEach((key) => {
+        if (!obj.hasOwnProperty(key)) {
+            valid = false
         }
     })
-    return validate;
+    Object.keys(obj).forEach((key) => {
+        if (!validKeys.includes(key)) {
+            valid = false
+        }
+    })
+    return valid
 }

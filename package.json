@@ -8,10 +8,9 @@
     "path": false
   },
   "scripts": {
-    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest",
-    "start:dev": "nodemon src/index.ts",
-    "start:prod": "node dist/index.cjs",
-    "webpack": "node_modules/.bin/webpack --config webpack.config.js --mode=production"
+    "test": "jest --detectOpenHandles",
+    "start:dev": "nodemon --exec node --experimental-specifier-resolution=node --loader ts-node/esm src/index.ts",
+    "start:prod": "webpack --mode=production && node dist/index.cjs"
   },
   "repository": {
     "type": "git",
