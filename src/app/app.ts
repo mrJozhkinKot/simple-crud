@@ -1,5 +1,3 @@
-import * as http from 'http';
-import { UserInterface } from '../intefaces/interfaces';
 import { server } from './server';
 
 

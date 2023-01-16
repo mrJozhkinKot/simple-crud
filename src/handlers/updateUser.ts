@@ -8,6 +8,7 @@ import {
   ERROR_BAD_REQUEST,
   ERROR_USER,
   ERROR_USERID,
+  ERROR_SERVER,
 } from "../service/messages";
 
 export const updateUser = async (
@@ -27,19 +28,23 @@ export const updateUser = async (
             req.body = JSON.parse(body);
           } catch {}
         }
-        if (validateJSONParse(body) && validateRequest(req.body)) {
-          res.writeHead(200, {
-            "Content-type": " application/json",
-          });
-          const userUpdated = { ...user, ...req.body };
-          res.end(JSON.stringify(userUpdated));
-          users.forEach((u, index) => {
-            if (u.id === userUpdated.id) {
-              users.splice(index, 1, userUpdated);
-            }
-          });
+        if (validateJSONParse(body)) {
+          if (validateRequest(req.body)) {
+            res.writeHead(200, {
+              "Content-type": " application/json",
+            });
+            const userUpdated = { ...user, ...req.body };
+            res.end(JSON.stringify(userUpdated));
+            users.forEach((u, index) => {
+              if (u.id === userUpdated.id) {
+                users.splice(index, 1, userUpdated);
+              }
+            });
+          } else {
+            messageLogger(res, 400, ERROR_BAD_REQUEST);
+          }
         } else {
-          messageLogger(res, 400, ERROR_BAD_REQUEST);
+          messageLogger(res, 500, ERROR_SERVER);
         }
       });
     } else {
