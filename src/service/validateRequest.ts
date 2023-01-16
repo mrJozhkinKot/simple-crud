@@ -13,6 +13,9 @@ export const validateRequest = (obj: UserInterface) => {
             valid = false
         }
     })
+    if (!Array.isArray(obj['hobbies']) || typeof(obj['age']) !== 'number' || typeof(obj['username']) !== 'string') {
+        valid = false
+    }
     if (obj['hobbies'].length) {
         obj['hobbies'].forEach((hobby) => {
             if (typeof(hobby) !== 'string') {
