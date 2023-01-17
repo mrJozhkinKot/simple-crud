@@ -1,0 +1,44 @@
+{
+  "name": "simple-crud",
+  "version": "1.0.0",
+  "description": "CRUD app",
+  "main": "index.js",
+  "type": "module",
+  "browser": {
+    "path": false
+  },
+  "scripts": {
+    "test": "jest --detectOpenHandles",
+    "start:dev": "nodemon --exec node --experimental-specifier-resolution=node --loader ts-node/esm src/index.ts",
+    "start:prod": "webpack --mode=production && node dist/index.cjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrJozhkinKot/simple-crud.git"
+  },
+  "author": "Julia Shchuklina",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrJozhkinKot/simple-crud/issues"
+  },
+  "homepage": "https://github.com/mrJozhkinKot/simple-crud#readme",
+  "devDependencies": {
+    "@types/jest": "^29.2.5",
+    "@types/node": "^18.11.18",
+    "@types/supertest": "^2.0.12",
+    "@types/uuid": "^9.0.0",
+    "jest": "^29.3.1",
+    "nodemon": "^2.0.20",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.0.3",
+    "ts-loader": "^9.4.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "uuid": "^9.0.0"
+  }
+}
